@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScatterPlot } from "..";
+import { ScatterPlot, Bar, BarSvg } from "..";
 
 const styles = {
   width: 500,
@@ -27,8 +27,9 @@ const Chart = props => {
 
   return (
     <div className="controls">
-      D3 Chart
-      <ScatterPlot {...state} {...styles} />
+      {props.type === "scatter" && <ScatterPlot {...state} {...styles} />}
+      {props.type === "bar" && <Bar></Bar>}
+      {props.type === "barsvg" && <BarSvg></BarSvg>}
       <button className="btn randomize" onClick={() => randomiseData()}>
         Randomise Data
       </button>

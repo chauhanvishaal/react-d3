@@ -13,7 +13,7 @@ const xScale = props => {
       .scaleLinear()
       // range of possible input value
       .domain([0, xMax(props.data)])
-      .range([props.padding, props.width - (props.padding * 2)])
+      .range([props.padding, props.width - props.padding * 2])
   );
 };
 
@@ -29,12 +29,15 @@ const yScale = props => {
 
 const ScatterPlot = props => {
   const scales = { xScale: xScale(props), yScale: yScale(props) };
-//   console.log(props);
+  //   console.log(props);
   return (
-    <svg width={props.width} height={props.height}>
-      <DataCircles {...props} {...scales}></DataCircles>
-      <XYAxis {...props} {...scales}></XYAxis>
-    </svg>
+    <div>
+      Scatter Chart
+      <svg width={props.width} height={props.height}>
+        <DataCircles {...props} {...scales}></DataCircles>
+        <XYAxis {...props} {...scales}></XYAxis>
+      </svg>
+    </div>
   );
 };
 

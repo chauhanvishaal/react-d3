@@ -20,7 +20,9 @@ function App() {
           Learn React
         </a>
       </header>
-      <Chart></Chart>
+      <Chart type="scatter"></Chart>
+      <Chart type="bar"></Chart>
+      <Chart type="barsvg"></Chart>
     </div>
   );
 }
