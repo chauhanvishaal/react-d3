@@ -1,6 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import { DataCircles, XYAxis } from "..";
+import { d3Scale } from "../../Common";
 
 // return largest X coordinate from the data set
 const xMax = data => d3.max(data, d => d[0]);
@@ -8,22 +9,16 @@ const yMax = data => d3.max(data, d => d[1]);
 
 //Scales x coordinates from the data to fit the chart
 const xScale = props => {
-  return (
-    d3
-      .scaleLinear()
-      // range of possible input value
-      .domain([0, xMax(props.data)])
-      .range([props.padding, props.width - props.padding * 2])
+  return d3Scale(
+    { min: 0, max: xMax(props.data) },
+    { min: props.padding, max: props.width - props.padding }
   );
 };
 
 const yScale = props => {
-  return (
-    d3
-      .scaleLinear()
-      // range of possible input value
-      .domain([0, yMax(props.data)])
-      .range([props.height - props.padding, props.padding])
+  return d3Scale(
+    { min: 0, max: yMax(props.data) },
+    { min: props.height - props.padding, max: props.padding }
   );
 };
 

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
+import "./index.css";
 
-const dataChars = ["A", "B", "C", "D", "E"];
-const populationDataArr = [40, 30, 20, 50, 25];
 const populationData = [
   {
     population: 40,
@@ -22,31 +21,44 @@ const populationData = [
   }
 ];
 
+const chartHeight = 100;
+const barPadding = 5;
+const barHeight = 15;
+
+const getYPos = index => {
+  return (
+    chartHeight +
+    barPadding -
+    (chartHeight - (index + 1) * (barHeight + barPadding))
+  );
+};
+
+const renderBars = props => {
+  d3.select("#bar-svg")
+    .selectAll("rect")
+    .data(populationData, pd => pd.population)
+    .enter()
+    .append("rect")
+    .attr("class", "bar-svg")
+    .attr("y", (d, i) => {
+      return getYPos(i);
+    })
+    .attr("width", d => d.population * barPadding)
+    .attr("height", 15);
+};
+
 const BarSvg = props => {
   useEffect(() => {
     renderBars(props);
   });
 
-  const renderBars = props => {
-    d3.select("#bar-svg")
-      .selectAll("rect")
-      .data(populationData, pd => pd.population)
-      .enter()
-      .append("rect")
-      .attr("class", "bar-svg")
-      .attr("y", (d, i) => i * 20)
-      .attr("width", d => d.population * 5)
-      .attr("height", 15)
-      .text(d => {
-        return d.population + " mil";
-      });
-  };
-
   return (
     <div>
       Bar Chart - Svg
       <div>(Todo - scaling, vertical bars, labels)</div>
-      <svg id="bar-svg">Bar Chart</svg>;
+      <svg id="bar-svg" height={chartHeight}>
+        Bar Chart
+      </svg>
     </div>
   );
 };

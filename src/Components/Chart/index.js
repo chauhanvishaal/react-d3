@@ -27,6 +27,7 @@ const Chart = props => {
 
   return (
     <div className="controls">
+      {/* https://github.com/freddyrangel/playing-with-react-and-d3 */}
       {props.type === "scatter" && <ScatterPlot {...state} {...styles} />}
       {props.type === "bar" && <Bar></Bar>}
       {props.type === "barsvg" && <BarSvg></BarSvg>}
